@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="Pragma" content="no-cache"> 
+        <meta http-equiv="Cache-Control" content="no-cache">
+        <meta http-equiv="Expires" content="-1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
+        <meta name="description" content="서울천일초등학교 영재교육원 학생 건강상태 자가진단" />
+        <!-- google android pwa -->
+        <link rel="manifest" href="/manifest.json?refreshed=<?=time();?>">
+        <meta name="theme-color" content="#2185d0" />
+        <link rel="shortcut icon" href="/icons/favicon.ico">
+        <!-- apple webapps -->
+        <link rel="apple-touch-icon" href="/icons/maskable_icon_x128.png" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <meta name="apple-mobile-web-app-title" content="천일초 건강상태 자가진단" />
+        <title>서울천일초등학교 영재교육원 학생 건강상태 자가진단</title>
+        <link rel="stylesheet" href="/assets/semantic/semantic.min.css">
+        <script src="/assets/jquery/jquery-3.6.0.min.js"></script>
+        <script src="/assets/jquery-cookie/jquery.cookie.js"></script>
+        <script src="/assets/semantic/semantic.min.js"></script>
+        <link rel="stylesheet" href="/assets/css/gifted.css?refreshed=<?=time();?>">
+        <script>
+            var choice_school = 0;
+            var autologin = localStorage.getItem('autologin');
+            var school_name = localStorage.getItem('school-name');
+            var school_code = localStorage.getItem('school-code');
+            var student_name = localStorage.getItem('student-name');
+            function check_sheet() {
+                $('#contentBody').load('/check_sheet.html')
+            }
+        </script>
+    </head>
+
+    <body>
+        <div id="container">
+            <div style="width:100%;height:100%;padding:10px;">
+                <span style="display:inline-block;float:right;font-weight:bold;color:rgba(0,0,0,.6);font-size:12pt;">ver 1.0.0</span>
+                <div style="clear:both"></div>
+                <div style="width:100%;height:calc(100% - 20px);padding:20px;">
+                    <h2 class="ui header">
+                        <img src="/assets/images/logo.png" style="width:40px;height:auto;margin-bottom:20px;margin-left:-10px" alt="서울천일초등학교 로고">
+                        <div style="clear:both"></div>
+                        건강상태 자가진단
+                        <div class="sub header">Health condition self-check</div>
+                    </h2>
+                    <div id="contentBody">
+                        서비스에 연결할 수 없습니다.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

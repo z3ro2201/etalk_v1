@@ -1,0 +1,36 @@
+{
+    "name": "천일초 건강상태 자가진단",
+    "short_name": "서울천일초등학교 영재교육원",
+    "icons": [
+        {
+            "src": "/icons/maskable_icon_x48.png",
+            "sizes": "48x48",
+            "type": "image/png"
+        },
+        {
+            "src": "/icons/maskable_icon_x72.png",
+            "sizes": "72x72",
+            "type": "image/png"
+        },
+        {
+            "src": "/icons/maskable_icon_x96.png",
+            "sizes": "96x96",
+            "type": "image/png"
+        },
+        {
+            "src": "/icons/maskable_icon_x192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/icons/maskable_icon_x384.png",
+            "sizes": "384x384",
+            "type": "image/png"
+        }
+    ],
+    "start_url": "/index.php?join=webapps",
+    "display": "fullscreen",
+    "background_color": "#FFF",
+    "theme_color": "#2185d0"
+}

@@ -1,0 +1,68 @@
+<div class="loginForm"> <form class="ui large form" method="POST" id="loginForm" action="/covid19.userLoginProc.php"><input type="hidden" name="lm" value="login"> <div class="ui stacked segment left aligned"> <div class="field"> <input type="text" id="school-name" class="search" name="school_name" placeholder="학교명"> <input type="hidden" id="school-code" name="school_code"> <div class="results"></div> </div> <div class="field"> <input type="text" id="stu-name" name="student_name" placeholder="학생성명"> </div> <div class="field"> <div class="ui checkbox checked" id="autologin"> <input type="checkbox"> <label>시스템 이용동의</label> </div> </div> <div class="ui fluid large teal submit button disabled" id="login">로그인</div> </div> </form> <div class="ui message"> <i class="info circle icon blue"></i> 시스템에 저장되는 항목: 이름, 학교명, 진단항목, 진단일</div> </div>
+<script>
+$(function() {
+	$('#school-name').keyup(function() {
+		var api_school = "";
+		if(choice_school == 0) {
+			$.ajax({
+				type: 'GET',
+				url: '/searchSchool.php',
+				data: { schoolname: $('#school-name').val() },
+				dataType: "json"
+			}).done(function(json) {
+				$.each(json.schoolinfo, function(index, item) {
+					if((item['name'] != undefined) && (item['code'] != undefined)) {
+						api_school += "<a href=\"javascript:;\" onclick class=\"item choice\"><span class='school-name'>" + item['name'] + "</span><span class='school-code' style='text-indent:-9999px;display:block;position:absolute'>"+ item['code'] + "</span></a>\n";
+					}
+				});
+				if($('#school-name').val().length == 0) $('.results').html("");
+				else $('.results').html('<div class="ui vertical menu link">' + api_school + '</div>');
+			});
+		}
+	})
+
+	$(document).on("click", '.item.choice', function() {
+		choice_school = 1;
+		$('input#school-name').val($(this).children('span.school-name').text());
+		$('input#school-code').val($(this).children('span.school-code').text());
+		$('.results').html("")
+	})
+
+	$('#login').click(function() {
+		if(!window.localStorage){
+			alert('미지원 브라우저');
+			return false;
+		}
+		if(($('input[name=school_name]').val() == "") || ($('input[name=school_code]').val() =="")) {
+			alert('학교명을 입력하여 주십시요.');
+			$('input[name=school_name]').focus();
+			return false;
+		}
+		if($('input[name=student_name]').val() == "") {
+			alert('학생성명을 입력하여 주십시요.');
+			$('input[name=student_name]').focus();
+			return false;
+		}
+//		localStorage.setItem('school-name', $('#school-name').val());
+//		localStorage.setItem('school-code', $('#school-code').val());
+//		localStorage.setItem('student-name', $('#stu-name').val());
+		$('#loginForm').submit();
+	})
+
+	$('.checkbox').checkbox({
+		onChecked:function(){
+			alert('정보 저장에 동의하셨습니다.\n저장되는 정보는 학생성명 및 학교명 입니다.');
+			localStorage.setItem('autologin', 'Y');
+			$('#login').removeClass('disabled');
+		},
+		onUnchecked: function() {
+			alert('정보 저장을 철회하셨습니다.\n단말기에는 더 이상 저장되지 않습니다.');
+			localStorage.removeItem('autologin');
+			localStorage.removeItem('school-name');
+			localStorage.removeItem('school-code');
+			localStorage.removeItem('student-name');
+			$('#login').addClass('disabled');
+		}
+	})
+})
+</script>

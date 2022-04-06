@@ -1,0 +1,92 @@
+<form name="chkSheet" onsubmit="return checkForm();" action="/covid19.dataReg.php" method="POST">
+<input type="hidden" name="student_name" id="student-name">
+<input type="hidden" name="school_code" id="school-code">
+<input type="hidden" name="school_name" id="school-name">
+<div class="rows top">
+    <span style="display:block;">
+        1. 학생은 <font style="font-weight:bold;text-decoration:underline">코로나19가 의심되는 아래의 임상증상</font>이 있나요?<br>
+        *(주요임상증상) 체온 37.5℃이상, 기침, 호흡곤란, 오한, 근육통, 두통, 인후통,후각 또는 미각 소실, 폐렴<br>
+         (단, 코로나19와 관계없이 평소의 기저질환으로 인한 증상인 경우는 제외)
+    </span>
+    <div class="clearfix"></div>
+    <div class="button-group">
+        <input type="radio" name="symptom_test" value="0" id="symptom_no">
+        <label class="chkbtn" for="symptom_no">아니오</label>
+        <input type="radio" name="symptom_test" value="1" id="symptom_yes">
+        <label class="chkbtn" for="symptom_yes">예</label>
+    </div>
+    <div class="clearfix"></div>
+</div>
+
+<div class="rows">
+    <span style="display:block;">
+        2. 학생 또는 동거인이 코로나19 의심증상으로 진단검사를 받고 그 결과를 기다리고 있나요? 
+    </span>
+    <div class="clearfix"></div>
+    <div class="button-group">
+        <input type="radio" name="diagnosis_test" value="0" id="diagnosis_test_no">
+        <label class="chkbtn" for="diagnosis_test_no">아니오</label>
+        <input type="radio" name="diagnosis_test" value="1" id="diagnosis_test_yes">
+        <label class="chkbtn" for="diagnosis_test_yes">예</label>
+    </div>
+    <div class="clearfix"></div>
+</div>
+
+<div class="rows footer">
+    <span style="display:block;">
+        3. 학생 또는 동거인이 <font style="font-weight:bold;text-decoration:underline">방역당국에 의해 현재 자가격리</font>가 이루어지고 있나요?<br>
+        *<방역당국 지침>최근 14일 이내 해외 입국자, 확진자와 접촉자 등은 자가격리 조치<br>
+        단, 직업특성상 잦은 해외 입출국으로 의심증상이 없는 경우 자가격리 면제
+    </span>
+    <div class="clearfix"></div>
+    <div class="button-group">
+        <input type="radio" name="self_quarantine" value="0" id="self_quarantine_no">
+        <label class="chkbtn" for="self_quarantine_no">아니오</label>
+        <input type="radio" name="self_quarantine" value="1" id="self_quarantine_yes">
+        <label class="chkbtn" for="self_quarantine_yes">예</label>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div class="rows no-border center">
+    <button type="submit" class="btnSubmit">제출</button>
+</div>
+</form>
+
+<style>
+.center{text-align:center;}
+.clearfix{clear:both;}
+.rows{border-bottom:1px solid #ccc;padding:25px 5px;line-height:150%}
+.rows.no-border{border-bottom:none;border-top:none;}
+.rows.top{border-top:2px solid rgba(0,0,0,.6);}
+.rows.footer{border-bottom:2px solid rgba(0,0,0,.6);}
+.button-group{width:100%;height:auto !important;margin:10px 0px;}
+.button-group input[type=radio]{display:none;}
+.button-group label.chkbtn{display:inline-block;width:calc(100% / 2);float:left;padding:25px;text-align:center;background:#e0e1e2 none;color:rgba(0,0,0,.6);font-weight:700;line-height:1em;font-style:normal;}
+.button-group input[type=radio]:checked + label.chkbtn{background:#2185d0;color:#FFF;}
+.btnSubmit{width:80%;height:64px;color:#fff;background:#2185d0;border:0;}
+</style>
+
+<script>
+$(function() {
+    $('#student-name').val(student_name);
+    $('#school-name').val(school_name);
+    $('#school-code').val(school_code);
+})
+function checkForm() {
+    if($('input:radio[name=symptom_test]').is(':checked') == false)
+    {
+        alert('본인의 코로나19 의심증상여부를 확인해 주세요.');
+        return false;
+    }
+    if($('input:radio[name=diagnosis_test]').is(':checked') == false)
+    {
+        alert('진단검사 여부를 확인해주세요.')
+        return false;
+    }
+    if($('input:radio[name=self_quarantine]').is(':checked') == false)
+    {
+        alert('자가격리 여부를 확인해주세요.');
+        return false;
+    }
+}
+</script>
